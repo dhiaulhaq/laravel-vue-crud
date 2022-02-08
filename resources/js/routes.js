@@ -1,8 +1,11 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import AllUsers from './components/AllUsers.vue';
 import CreateUser from './components/CreateUser.vue';
 import EditUser from './components/EditUser.vue';
+Vue.use(VueRouter);
 
-export const routes = [{
+const routes = [{
         name: 'home',
         path: '/',
         component: AllUsers
@@ -11,10 +14,13 @@ export const routes = [{
         name: 'create',
         path: '/create',
         component: CreateUser
-    },
-    {
-        name: 'edit',
-        path: '/edit/:id',
-        component: EditUser
     }
 ];
+
+export default new VueRouter({
+    mode: 'history',
+    scrollBehavior: (to, from, savedPosition) => ({
+        y: 0
+    }),
+    routes
+})
